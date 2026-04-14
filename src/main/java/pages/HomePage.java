@@ -1,10 +1,8 @@
 package pages;
 
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
@@ -54,8 +52,9 @@ public class HomePage extends BasePage {
         return waitForElementVisible(occupancyText).getText().replace("&npsp;", " ");
     }
 
-    public void clickSearchButton() {
-        waitForElementClickable(searchButton);
+    public SearchPage clickSearchButton() {
+        waitForElementClickable(searchButton).click();
+        return new SearchPage(driver);
     }
 
     public void selectDayPicker(String startDate, String endDate) {
