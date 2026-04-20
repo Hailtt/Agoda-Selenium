@@ -11,7 +11,6 @@ import utils.ExtentReportManager;
 
 public class SearchPage extends BasePage {
 
-
     private By containerPage = By.id("reactSearchPage");
 
     private String itemXpath = "//ol/li[%d]//div[@dir='ltr']";

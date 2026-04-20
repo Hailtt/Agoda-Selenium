@@ -10,9 +10,8 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.NorthstarPage;
 import pages.SearchPage;
-import utils.DateTimeUtils;
 import utils.ExtentReportManager;
-import utils.JsonUtils;
+import utils.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class VerifyTheHotelPrice extends BaseTest {
     @DataProvider(name = "hotelData")
     public Object[][] getHotelData() {
         String path = "src/test/resources/testdata/hotels.json";
-        List<Map<String, Object>> dataList = JsonUtils.getData(path);
+        List<Map<String, Object>> dataList = Utils.getData(path);
 
         Object[][] data = new Object[dataList.size()][1];
         for (int i = 0; i < dataList.size(); i++) {
@@ -59,11 +58,11 @@ public class VerifyTheHotelPrice extends BaseTest {
 
         // STEP 2: Select CheckInDay and CheckOutDay
         ExtentReportManager.logInfoWithScreenshot("Step 2: Selecting dates");
-        selecAndVerifyDayPicker(startDayFromToday, endDayFromToday);
+        selectAndVerifyDayPicker(startDayFromToday, endDayFromToday);
 
         // STEP 3: Change value of Adults
         ExtentReportManager.logInfoWithScreenshot("Step 3: Setting occupancy");
-        selecAndVerifyAdult(data);
+        selectAndVerifyAdult(data);
 
         // STEP 4: Click Search button
         ExtentReportManager.logInfoWithScreenshot("Step 4: Clicking search button");
@@ -80,13 +79,13 @@ public class VerifyTheHotelPrice extends BaseTest {
         ExtentReportManager.logInfoWithScreenshot("TEST CASE FINISHED SUCCESSFULLY");
     }
 
-    private void selecAndVerifyDayPicker(int startDay, int endDay) {
-        String startDateStr = DateTimeUtils.getTargetDate(startDay, formatDayPicker);
-        String endDateStr = DateTimeUtils.getTargetDate(endDay, formatDayPicker);
+    private void selectAndVerifyDayPicker(int startDay, int endDay) {
+        String startDateStr = Utils.getTargetDate(startDay, formatDayPicker);
+        String endDateStr = Utils.getTargetDate(endDay, formatDayPicker);
         homePage.selectDayPicker(startDateStr, endDateStr);
 
-        startDateStr = DateTimeUtils.formatStringDate(startDateStr, formatDayPicker, formatCheckingDay);
-        endDateStr = DateTimeUtils.formatStringDate(endDateStr, formatDayPicker, formatCheckingDay);
+        startDateStr = Utils.formatStringDate(startDateStr, formatDayPicker, formatCheckingDay);
+        endDateStr = Utils.formatStringDate(endDateStr, formatDayPicker, formatCheckingDay);
 
         String actualStartDaypicker = homePage.getTextCheckInDayPicker();
         String actualEndDaypicker = homePage.getTextCheckOutDayPicker();
@@ -102,7 +101,7 @@ public class VerifyTheHotelPrice extends BaseTest {
         softAssert.assertAll();
     }
 
-    private void selecAndVerifyAdult(Map<String, Object> data) {
+    private void selectAndVerifyAdult(Map<String, Object> data) {
         int rooms = Integer.parseInt(data.get("rooms").toString());
         int adults = Integer.parseInt(data.get("adults").toString());
         int children = Integer.parseInt(data.get("children").toString());

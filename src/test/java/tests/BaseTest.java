@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import utils.Constants;
 import utils.DriverManager;
 
 public class BaseTest {
@@ -12,7 +13,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({ "browser", "url" })
-    public void setUp(@Optional("chrome") String browser, @Optional(utils.Constants.AGODA_URL) String url) {
+    public void setUp(@Optional("chrome") String browser, @Optional(Constants.AGODA_URL) String url) {
         DriverManager.setDriver(browser);
         this.driver = DriverManager.getDriver();
         this.driver.get(url);

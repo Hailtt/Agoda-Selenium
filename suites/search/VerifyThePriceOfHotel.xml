@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Search Workflow Suite" parallel="methods" thread-count="2">
+<suite name="Verify The Price Of Hotel" parallel="methods" thread-count="1">
     <listeners>
         <listener class-name="utils.TestListener"/>
     </listeners>
     <parameter name="browser" value="chrome"/>
-    <test name="Agoda Price Verification">
+    <test name="Verify the price of Hotel of first search result">
         <classes>
             <class name="tests.search.VerifyTheHotelPrice"/>
         </classes>

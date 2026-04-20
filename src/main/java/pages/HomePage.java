@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import utils.ExtentReportManager;
+
 public class HomePage extends BasePage {
 
 
@@ -16,7 +18,7 @@ public class HomePage extends BasePage {
 
     private By occupancyText = By.xpath("//div[@data-selenium=\"occupancyBox\"]");
     private By searchButton = By.xpath("//button[@data-element-name='search-button']");
-    private By sreachContentPopup = By.xpath("//div[contains(@class,\"Popup__content_Occupancy\")]");
+    private By searchContentPopup = By.xpath("//div[contains(@class,\"Popup__content_Occupancy\")]");
 
     private String dayPicker = "//div[contains(@aria-label,'%s')]";
     private String occupancyOption = "//div[@data-element-name='occupancy-selector-panel']/div/div[%s]";
@@ -27,10 +29,10 @@ public class HomePage extends BasePage {
 
     public void searchHotel(String hotelName) {
 
-        utils.ExtentReportManager.logInfo("Searching for hotel: " + hotelName);
+        ExtentReportManager.logInfo("Searching for hotel: " + hotelName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchInput));
         setValue(searchInput, hotelName);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(sreachContentPopup));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchContentPopup));
         pressEscKey();
     }
 
@@ -53,7 +55,7 @@ public class HomePage extends BasePage {
     }
 
     public String getTextOccupancyBox() {
-        return waitForElementVisible(occupancyText).getText().replace("&npsp;", " ");
+        return waitForElementVisible(occupancyText).getText().replace("&nbsp;", " ");
     }
 
     public SearchPage clickSearchButton() {
@@ -63,7 +65,7 @@ public class HomePage extends BasePage {
 
     public void selectDayPicker(String startDate, String endDate) {
 
-        utils.ExtentReportManager.logInfo("Selecting dates: " + startDate + " to " + endDate);
+        ExtentReportManager.logInfo("Selecting dates: " + startDate + " to " + endDate);
         wait.until(ExpectedConditions.visibilityOfElementLocated(checkInBox));
         clickElement(checkInBox);
         By startElement = By.xpath(String.format(dayPicker, startDate));
