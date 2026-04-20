@@ -1,7 +1,7 @@
-package tests;
+package tests.search;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import tests.BaseTest;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,9 +17,8 @@ import utils.JsonUtils;
 import java.util.List;
 import java.util.Map;
 
-public class Demo_TC extends BaseTest {
+public class VerifyTheHotelPrice extends BaseTest {
 
-    private static final Logger log = LogManager.getLogger(Demo_TC.class);
     private HomePage homePage;
     private SearchPage searchPage;
     private NorthstarPage northstarPage;
@@ -45,13 +44,14 @@ public class Demo_TC extends BaseTest {
         return data;
     }
 
-    @Test(description = "Verify price display for specific hotel search", dataProvider = "hotelData")
-    public void verifyHotelPriceDisplay(Map<String, Object> data) {
+    @Test(description = "Verify the price of the first hotel in search results", dataProvider = "hotelData")
+    public void verifyPriceOfFirstSearchResult(Map<String, Object> data) {
         String searchValue = data.get("hotelName").toString();
         int startDayFromToday = Integer.parseInt(data.get("startDayFromToday").toString());
         int endDayFromToday = Integer.parseInt(data.get("endDayFromToday").toString());
 
-        ExtentReportManager.logInfoWithScreenshot("START TEST: verifyHotelPriceDisplay with hotel: " + searchValue);
+        ExtentReportManager
+                .logInfoWithScreenshot("START TEST: verifyPriceOfFirstSearchResult with hotel: " + searchValue);
 
         // STEP 1: Input into Search Box
         ExtentReportManager.logInfoWithScreenshot("Step 1: Searching for hotel: " + searchValue);
@@ -76,7 +76,7 @@ public class Demo_TC extends BaseTest {
         // STEP 6: Switch new tab and verify
         ExtentReportManager.logInfoWithScreenshot("Step 6: Verifying hotel details in new tab");
         switchToNewTabAndVerify();
-        
+
         ExtentReportManager.logInfoWithScreenshot("TEST CASE FINISHED SUCCESSFULLY");
     }
 
@@ -91,8 +91,10 @@ public class Demo_TC extends BaseTest {
         String actualStartDaypicker = homePage.getTextCheckInDayPicker();
         String actualEndDaypicker = homePage.getTextCheckOutDayPicker();
 
-        ExtentReportManager.logInfo("Verify Check-in: Expected [" + startDateStr + "], Actual [" + actualStartDaypicker + "]");
-        ExtentReportManager.logInfo("Verify Check-out: Expected [" + endDateStr + "], Actual [" + actualEndDaypicker + "]");
+        ExtentReportManager
+                .logInfo("Verify Check-in: Expected [" + startDateStr + "], Actual [" + actualStartDaypicker + "]");
+        ExtentReportManager
+                .logInfo("Verify Check-out: Expected [" + endDateStr + "], Actual [" + actualEndDaypicker + "]");
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(actualStartDaypicker.contains(startDateStr), "Check-in date mismatch!");
@@ -137,7 +139,8 @@ public class Demo_TC extends BaseTest {
         String actualTitle = northstarPage.getTitleHotel().trim();
         String actualPrice = northstarPage.getPriceHotel().trim();
 
-        ExtentReportManager.logInfo("Verify Hotel Title: Expected [" + titleFirstItem + "], Actual [" + actualTitle + "]");
+        ExtentReportManager
+                .logInfo("Verify Hotel Title: Expected [" + titleFirstItem + "], Actual [" + actualTitle + "]");
         ExtentReportManager.logInfo("Verify Hotel Price: Expected [Not Empty], Actual [" + actualPrice + "]");
 
         SoftAssert softAssert = new SoftAssert();

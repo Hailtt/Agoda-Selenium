@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.demo.selenium</groupId>
-  <artifactId>selenium-pom-framework</artifactId>
+  <artifactId>agoda-automation-framework</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>selenium-pom-framework</name>
+  <name>Agoda Automation Framework</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -108,7 +108,7 @@
         <version>3.2.5</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>demo_TC.xml</suiteXmlFile>
+            <suiteXmlFile>suites/search/VerifyThePriceOfHotel.xml</suiteXmlFile>
           </suiteXmlFiles>
           <properties>
             <property>

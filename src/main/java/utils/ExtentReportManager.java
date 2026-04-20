@@ -34,7 +34,7 @@ public class ExtentReportManager {
             
             extent = new ExtentReports();
             extent.attachReporter(spark);
-            extent.setSystemInfo("Project", "Demo Selenium Agoda");
+            extent.setSystemInfo("Project", "Agoda Automation Project");
             extent.setSystemInfo("Environment", "QA");
             extent.setSystemInfo("User", "Tester");
         }
